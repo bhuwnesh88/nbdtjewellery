@@ -1,20 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Grid, Button } from "semantic-ui-react";
-import { Col, Row } from "antd";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { Col, Row, Drawer } from "antd";
 import "antd/dist/antd.css";
 import "./App.css";
+import { MenuOutlined } from "@ant-design/icons";
+
+const useStyles = makeStyles(theme => ({
+	gr: {
+		// className="shadow-md p-12 pt-4 lg:w-full xl:m-0 mt-8 xl:absolute"
+		boxShadow: "0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12)",
+		[theme.breakpoints.down("xl")]: {
+			width: "119.5%",
+			position: "absolute",
+			background: "#f0eee2",
+			height: 130,
+			padding: 24,
+		},
+		[theme.breakpoints.down("xs")]: {
+			width: "100%",
+			position: "unset",
+			background: "#f0eee2",
+			height: 130,
+			padding: 24,
+			marginTop: 20,
+		},
+	},
+	txt: {
+		[theme.breakpoints.down("xs")]: { fontSize: 3, marginLeft: 0 },
+		[theme.breakpoints.down("xl")]: {
+			fontSize: 8,
+			color: "#999",
+			marginLeft: -10,
+		},
+	},
+}));
+
 function App() {
 	document.body.style.backgroundColor = "#093363";
+	const [visible, setVisible] = useState(false);
+
+	const classes = useStyles();
+
+	const showDrawer = () => {
+		setVisible(true);
+	};
+
+	const onClose = () => {
+		setVisible(false);
+	};
 	return (
 		<>
 			<Row justify="start" align="middle">
-				<Col xs={22} md={15} sm={15} lg={12} xl={22}>
+				<Col xs={24} md={24} sm={24} lg={24} xl={22}>
 					<div className="bg-white h-32 w-full flex justify-center items-center">
+						<div className="absolute left-0 top-0 ml-5 mt-12 xl:hidden block">
+							<MenuOutlined
+								onClick={showDrawer}
+								className="text-gray-800 text-2xl"
+								style={{ color: "#946b1c" }}
+							/>
+						</div>
 						<img
 							src={require("./mahavir/logobig.png")}
 							className="w-auto h-16"
 						/>
-						<ul className="flex justify-center items-center h-full w-auto">
+						<ul className="xl:flex hidden justify-center items-center h-full w-auto">
 							<li className="p-4 uppercase font-bold">GOLD</li>
 							<li className="p-4 uppercase font-bold">silver</li>
 							<li className="p-4 uppercase font-bold">diamond</li>
@@ -44,7 +96,7 @@ function App() {
 						</ul>
 					</div>
 				</Col>
-				<Col xl={2}>
+				<Col xs={0} lg={0} xl={2}>
 					<center>
 						<img
 							src={require("./mahavir/icons/cart.png")}
@@ -66,35 +118,35 @@ function App() {
 			</Row>
 
 			<Row justify="start">
-				<Col xs={22} md={15} sm={15} lg={12} xl={12}>
+				<Col xs={24} sm={12} md={12} lg={12} xl={12}>
 					<div className="bg-white flex justify-center items-center h-full">
 						<img
 							src={require("./mahavir/bannerproduct.png")}
-							style={{ height: 400 }}
+							className="h-auto"
 						/>
 					</div>
 				</Col>
 				<Col
-					xs={22}
-					md={15}
-					sm={15}
+					xs={24}
+					sm={12}
+					md={12}
 					lg={12}
 					xl={10}
 					style={{ background: "#fff", position: "initial" }}
 				>
 					<img
 						src={require("./mahavir/banner.png")}
-						style={{ height: 310, width: "50%", position: "absolute" }}
+						className="lg:absolute lg:w-1/2 w-full"
 					/>
 				</Col>
 			</Row>
 
 			<Row>
-				<Col xs={22} md={15} sm={15} lg={12} xl={12}>
+				<Col xs={24} md={12} sm={12} lg={12} xl={12}>
 					<center>
-						<div className="bg-white h-full">
+						<div className="bg-white h-full xl:pt-0 pt-8">
 							<h1
-								className="uppercase text-lg text-left tracking-normal"
+								className="uppercase text-lg text-left tracking-normal "
 								style={{
 									color: "#946b1c",
 									fontFamily: "mr",
@@ -106,37 +158,61 @@ function App() {
 							</h1>
 
 							<h1
-								className="uppercase text-5xl text-left tracking-normal"
+								className="uppercase xl:text-5xl lg:text-5xl text-2xl text-left tracking-normal"
 								style={{ color: "#000", fontFamily: "mb", paddingLeft: "17%" }}
 							>
 								Custom solitaries
 							</h1>
-							<div className="bg-white flex justify-around items-center h-full w-2/3">
+							<div className="bg-white flex justify-around items-center h-full xl:w-2/3 w-full">
 								<div>
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>{" "}
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>{" "}
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>
 								</div>
 								<div>
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>{" "}
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>{" "}
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>
-									<p className="text-xs text-gray-700 font-bold m-1">
+									<p
+										className="text-xs text-gray-700 font-bold m-1"
+										className={classes.txt}
+									>
 										Loreum ipsum Loreum ipsum Loreum ipsum
 									</p>
 								</div>
@@ -144,16 +220,8 @@ function App() {
 						</div>
 					</center>
 				</Col>
-				<Col xs={22} md={15} sm={15} lg={12} xl={10} className="bg-white">
-					<div
-						className="shadow-md p-12 pt-4"
-						style={{
-							background: "#f0eee2",
-							height: 130,
-							position: "absolute",
-							width: "119.5%",
-						}}
-					>
+				<Col xs={24} md={12} sm={12} lg={12} xl={10} className="bg-white">
+					<div className={classes.gr}>
 						<center>
 							<h1
 								className="uppercase text-sm tracking-normal text-left mb-0 pb-0"
@@ -162,7 +230,7 @@ function App() {
 								colors of the season
 							</h1>
 							<h1
-								className="uppercase text-2xl tracking-normal text-left"
+								className="uppercase xl:text-2xl text-lg tracking-normal text-left"
 								style={{ color: "#000", fontFamily: "mr" }}
 							>
 								new collection - <br /> diamond & emerald jewellery
@@ -174,33 +242,28 @@ function App() {
 
 			<Row justify="start">
 				<Col
-					xs={22}
-					md={15}
-					sm={15}
-					lg={12}
+					xs={24}
+					sm={22}
+					md={22}
+					lg={22}
 					xl={22}
 					style={{
 						background: "#fff",
 					}}
 				>
-					<center>
-						<div
+					<Row justify="space-around" align="middle">
+						<Col
+							xs={12}
+							md={4}
+							sm={4}
+							lg={4}
+							xl={4}
 							style={{
-								display: "flex",
-								justifyContent: "space-around",
-								alignItems: "center",
 								background: "#fff",
-								height: 350,
-								width: "90%",
 							}}
 						>
 							<center>
-								<div style={{ width: 200, height: 150 }}>
-									<img
-										src={require("./mahavir/img3.png")}
-										style={{ width: 200, height: 200, objectFit: "fill" }}
-									/>
-								</div>
+								<img src={require("./mahavir/img3.png")} className="w-64" />
 								<p className="mt-12 capitalize font-bold text-sm mb-1">
 									diamond cocktail ring
 								</p>
@@ -212,13 +275,20 @@ function App() {
 									text.
 								</p>
 							</center>
+						</Col>
+						<Col
+							xs={12}
+							md={4}
+							sm={4}
+							lg={4}
+							xl={4}
+							style={{
+								background: "#fff",
+							}}
+						>
 							<center>
-								<div style={{ width: 200, height: 150 }}>
-									<img
-										src={require("./mahavir/img1.png")}
-										style={{ width: 200, height: 200, objectFit: "cover" }}
-									/>
-								</div>
+								<img src={require("./mahavir/img1.png")} className="w-64" />
+
 								<p className="mt-12 capitalize font-bold text-sm mb-1">
 									marquise diamond hoop earrings
 								</p>
@@ -230,13 +300,19 @@ function App() {
 									text.
 								</p>
 							</center>
+						</Col>
+						<Col
+							xs={12}
+							md={4}
+							sm={4}
+							lg={4}
+							xl={4}
+							style={{
+								background: "#fff",
+							}}
+						>
 							<center>
-								<div style={{ width: 200, height: 150 }}>
-									<img
-										src={require("./mahavir/img2.png")}
-										style={{ width: 200, height: 200, objectFit: "cover" }}
-									/>
-								</div>
+								<img src={require("./mahavir/img2.png")} className="w-64" />
 								<p className="mt-12 capitalize font-bold text-sm mb-1">
 									ruby drop earring
 								</p>
@@ -248,13 +324,19 @@ function App() {
 									text.
 								</p>
 							</center>
+						</Col>
+						<Col
+							xs={12}
+							md={4}
+							sm={4}
+							lg={4}
+							xl={4}
+							style={{
+								background: "#fff",
+							}}
+						>
 							<center>
-								<div style={{ width: 200, height: 150 }}>
-									<img
-										src={require("./mahavir/img1.png")}
-										style={{ width: 200, height: 200, objectFit: "cover" }}
-									/>
-								</div>
+								<img src={require("./mahavir/img1.png")} className="w-64" />
 								<p className="mt-12 capitalize font-bold text-sm mb-1">
 									marquise diamond hoop earrings{" "}
 								</p>
@@ -266,13 +348,20 @@ function App() {
 									text.
 								</p>
 							</center>
+						</Col>{" "}
+						<Col
+							xs={12}
+							md={4}
+							sm={4}
+							lg={4}
+							xl={4}
+							style={{
+								background: "#fff",
+							}}
+						>
 							<center>
-								<div style={{ width: 200, height: 150 }}>
-									<img
-										src={require("./mahavir/img3.png")}
-										style={{ width: 200, height: 200, objectFit: "fill" }}
-									/>
-								</div>
+								<img src={require("./mahavir/img3.png")} className="w-64" />
+
 								<p className="mt-12 capitalize font-bold text-sm mb-1">
 									diamond cocktail ring
 								</p>
@@ -284,29 +373,29 @@ function App() {
 									text.
 								</p>
 							</center>
-						</div>
-					</center>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
-			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
+			<Row className="bg-white">
+				<Col xs={24} xl={22} className="bg-white  xl:mt-0 mt-8">
 					<img
 						src={require("./mahavir/offerbanner.png")}
-						className="w-auto h-auto p-24 ml-8"
+						className="w-auto h-auto xl:p-24 xl:ml-8"
 					/>
 				</Col>
 			</Row>
 
 			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
+				<Col xs={24} xl={22} className="bg-white p-4">
 					<img
 						src={require("./mahavir/offer.png")}
-						className="w-auto h-auto p-24 pt-0 pb-8 ml-8"
+						className="w-auto h-auto xl:p-24 pt-0 pb-8 xl:ml-8"
 					/>
 				</Col>
 			</Row>
 			<Row justify="start">
-				<Col xl={22} className="bg-white">
+				<Col xs={24} xl={22} className="bg-white p-4">
 					<h1
 						className="uppercase w-full text-center text-4xl"
 						style={{ fontFamily: "mm" }}
@@ -316,23 +405,23 @@ function App() {
 				</Col>
 			</Row>
 			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
+				<Col xs={24} xl={22} className="bg-white p-2">
 					<img
 						src={require("./mahavir/offer.png")}
-						className="w-auto h-auto p-24 pt-8 pb-5 ml-8"
+						className="w-auto h-auto xl:p-24 pt-8 pb-5 xl:ml-8"
 					/>
 				</Col>
 			</Row>
 			<Row justify="start">
-				<Col xl={22} className="bg-white">
+				<Col xs={24} xl={22} className="bg-white pt-5 pb-5">
 					<h1
-						className="uppercase w-full text-center text-4xl"
+						className="uppercase w-full text-center xl:text-4xl text-2xl"
 						style={{ fontFamily: "mm" }}
 					>
 						Trending products
 					</h1>
 					<h1
-						className="capitalize w-full text-gray-500 text-center text-lg font-normal"
+						className="capitalize w-full text-gray-500 text-center xl:text-lg text-sm font-normal"
 						style={{ fontFamily: "mr" }}
 					>
 						One Girl’s Journey To Making Her Fashion Dreams Come True In
@@ -341,14 +430,18 @@ function App() {
 				</Col>
 			</Row>
 
-			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
-					<div className="w-auto h-auto p-24 pt-8 pb-5 ml-8 flex justify-between">
-						<div style={{ width: 220, height: "auto" }}>
+			<Row justify="start">
+				<Col xs={24} xl={22}>
+					<Row
+						justify="space-around"
+						align="middle"
+						style={{ background: "#fff" }}
+					>
+						<Col xs={12} xl={4} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection1.png")}
-									style={{ width: 220, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-center w-full pt-4"
@@ -360,12 +453,12 @@ function App() {
 									Add to cart
 								</button>
 							</center>
-						</div>
-						<div style={{ width: 220, height: "auto" }}>
+						</Col>
+						<Col xs={12} xl={4} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection2.png")}
-									style={{ width: 220, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-center w-full pt-4"
@@ -377,13 +470,13 @@ function App() {
 									Add to cart
 								</button>
 							</center>
-						</div>
+						</Col>
 
-						<div style={{ width: 220, height: "auto" }}>
+						<Col xs={12} xl={4} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection3.png")}
-									style={{ width: 220, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-center w-full pt-4"
@@ -395,13 +488,13 @@ function App() {
 									Add to cart
 								</button>
 							</center>
-						</div>
+						</Col>
 
-						<div style={{ width: 220, height: "auto" }}>
+						<Col xs={12} xl={4} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection4.png")}
-									style={{ width: 220, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-center w-full pt-4"
@@ -413,22 +506,22 @@ function App() {
 									Add to cart
 								</button>
 							</center>
-						</div>
-					</div>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
 
 			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
+				<Col xs={24} xl={22} className="bg-white p-5">
 					<img
 						src={require("./mahavir/offer.png")}
-						className="w-auto h-auto p-24 pt-8 pb-5 ml-8"
+						className="w-auto h-auto xl:p-24 pt-8 pb-5 xl:ml-8"
 					/>
 				</Col>
 			</Row>
 
 			<Row>
-				<Col xl={24} style={{ background: "#fff" }}>
+				<Col xs={24} xl={24} className="bg-white p-5">
 					<img
 						src={require("./mahavir/discountsection.png")}
 						className="w-auto h-auto "
@@ -437,7 +530,7 @@ function App() {
 			</Row>
 
 			<Row justify="start">
-				<Col xl={22} className="bg-white">
+				<Col xs={24} xl={22} className="bg-white pt-8 pb-8">
 					<h1
 						className="uppercase w-full text-center text-4xl"
 						style={{ fontFamily: "mm" }}
@@ -447,14 +540,14 @@ function App() {
 				</Col>
 			</Row>
 
-			<Row>
-				<Col xl={22} style={{ background: "#fff" }}>
-					<div className="w-auto h-auto p-24 pt-8 pb-5 ml-8 flex justify-between">
-						<div style={{ width: 300, height: "auto" }}>
+			<Row justify="start">
+				<Col xs={24} sm={22} md={22} lg={22} xl={22}>
+					<Row justify="space-around" align="middle" className="bg-white">
+						<Col xs={12} sm={6} md={6} lg={6} xl={6} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection2.png")}
-									style={{ width: 300, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-left w-full pt-1 m-0 pb-0"
@@ -469,12 +562,12 @@ function App() {
 									Rare
 								</p>
 							</center>
-						</div>
-						<div style={{ width: 300, height: "auto" }}>
+						</Col>
+						<Col xs={12} sm={6} md={6} lg={6} xl={6} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection4.png")}
-									style={{ width: 300, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-left w-full pt-1 m-0 pb-0"
@@ -489,12 +582,12 @@ function App() {
 									Customize your jewellery
 								</p>
 							</center>
-						</div>
-						<div style={{ width: 300, height: "auto" }}>
+						</Col>
+						<Col xs={12} sm={6} md={6} lg={6} xl={6} className="bg-white p-6">
 							<center>
 								<img
 									src={require("./mahavir/collection3.png")}
-									style={{ width: 300, height: "auto" }}
+									className="w-64"
 								/>
 								<p
 									className="capitalize font-normal text-left w-full pt-1 m-0 pb-0"
@@ -509,13 +602,20 @@ function App() {
 									Rare
 								</p>
 							</center>
-						</div>
-					</div>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
 
 			<Row>
-				<Col xl={24} style={{ background: "#fff" }}>
+				<Col
+					xs={24}
+					sm={24}
+					md={24}
+					lg={24}
+					xl={24}
+					style={{ background: "#fff" }}
+				>
 					<img
 						src={require("./mahavir/footerbanner.png")}
 						style={{ width: "100%", height: 350, objectFit: "cover" }}
@@ -529,15 +629,15 @@ function App() {
 							width: "-webkit-fill-available",
 							height: "100%",
 						}}
+						className="lg:ml-0 ml-5"
 					>
-						<Col xl={7}>
+						<Col xs={14} sm={7} md={7} lg={7} xl={7}>
 							<h1 className="capitalize text-3xl" style={{ fontFamily: "mb" }}>
 								get latest from us!
 							</h1>
 							<h1
-								className="text-xs"
+								className="text-xs lg:text-gray-500 text-gray-800"
 								style={{
-									color: "#999",
 									fontFamily: "mr",
 									width: "70%",
 									fontWeight: 100,
@@ -548,7 +648,7 @@ function App() {
 							</h1>
 							<div style={{ display: "flex" }}>
 								<input
-									className="bg-transparent border-solid border-2 border-grey-400 h-8 pl-4 w-32 text-sm rounded-sm"
+									className="bg-gray-200 border-solid border-2 border-grey-400 h-8 pl-4 w-32 text-sm rounded-sm"
 									placeholder="Enter your mail"
 								/>
 								<button
@@ -575,7 +675,14 @@ function App() {
 				align="middle"
 				style={{ background: "#fff", padding: "5%", paddingBottom: "7%" }}
 			>
-				<Col xl={3} style={{ padding: 8, height: 200 }}>
+				<Col
+					xs={12}
+					sm={4}
+					md={3}
+					lg={3}
+					xl={3}
+					style={{ padding: 8, height: 200 }}
+				>
 					<center>
 						<h1
 							className="uppercase font-medium text-sm text-left"
@@ -594,7 +701,14 @@ function App() {
 						</ul>
 					</center>
 				</Col>
-				<Col xl={3} style={{ padding: 8, height: 200 }}>
+				<Col
+					xs={12}
+					sm={4}
+					md={3}
+					lg={3}
+					xl={3}
+					style={{ padding: 8, height: 200 }}
+				>
 					<center>
 						<h1
 							className="uppercase font-medium text-sm text-left"
@@ -613,7 +727,14 @@ function App() {
 						</ul>
 					</center>
 				</Col>
-				<Col xl={3} style={{ padding: 8, height: 200 }}>
+				<Col
+					xs={12}
+					sm={4}
+					md={3}
+					lg={3}
+					xl={3}
+					style={{ padding: 8, height: 200 }}
+				>
 					<center>
 						<h1
 							className="uppercase font-medium text-sm text-left"
@@ -632,7 +753,14 @@ function App() {
 						</ul>
 					</center>
 				</Col>
-				<Col xl={4} style={{ padding: 8, height: 200 }}>
+				<Col
+					xs={12}
+					sm={5}
+					md={4}
+					lg={4}
+					xl={4}
+					style={{ padding: 8, height: 200 }}
+				>
 					<center>
 						<h1
 							className="uppercase font-medium text-sm text-left"
@@ -716,7 +844,14 @@ function App() {
 						</ul>
 					</center>
 				</Col>
-				<Col xl={3} style={{ padding: 8, height: 200 }}>
+				<Col
+					xs={12}
+					sm={4}
+					md={3}
+					lg={3}
+					xl={3}
+					style={{ padding: 8, height: 200 }}
+				>
 					<center>
 						<h1
 							className="uppercase font-medium text-sm text-left"
@@ -749,12 +884,55 @@ function App() {
 				</Col>
 			</Row>
 			<Row justify="start" className="bg-white" style={{ height: 100 }}>
-				<Col xl={22}>
-					<p className="text-sm pl-32" style={{ fontFamily: "mb" }}>
+				<Col xs={24} xl={22}>
+					<p
+						className="text-sm xl:pl-32 lg:pl-32 md:pl-32 pl-5"
+						style={{ fontFamily: "mb" }}
+					>
 						© 2020, Powered by NB Digital Technologies
 					</p>
 				</Col>
 			</Row>
+
+			<Drawer
+				title={
+					<ul className="flex">
+						<li className="p-2">
+							<img
+								src={require("./mahavir/icons/pro.png")}
+								style={{ width: 20 }}
+							/>
+						</li>
+						<li className="p-2 pl-12 pr-12">
+							<img
+								src={require("./mahavir/icons/search.png")}
+								style={{ width: 20 }}
+							/>
+						</li>
+						<li className="p-2">
+							<img
+								src={require("./mahavir/icons/heart.png")}
+								style={{ width: 20 }}
+							/>
+						</li>
+					</ul>
+				}
+				placement="left"
+				closable={false}
+				onClose={onClose}
+				visible={visible}
+			>
+				<ul className="xl:flex justify-center items-center h-full w-auto">
+					<li className="p-4 uppercase font-bold">GOLD</li>
+					<li className="p-4 uppercase font-bold">silver</li>
+					<li className="p-4 uppercase font-bold">diamond</li>
+					<li className="p-4 uppercase font-bold">gold+diamond</li>
+					<li className="p-4 uppercase font-bold">collection</li>
+					<li className="p-4 uppercase font-bold">offers</li>
+					<li className="p-4 uppercase font-bold">try at home</li>
+					<li className="p-4 uppercase font-bold">fortune 50 scheme</li>
+				</ul>
+			</Drawer>
 		</>
 	);
 }
